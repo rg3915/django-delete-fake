@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% block  corpo %}
+    {% include 'core/_pessoa_form.html' %}
+
+    <div>
+        <p>Pessoas cadastradas:</p>
+        {% for pessoa in object_list %}
+            <p><a href="{{ pessoa.detail_url }}">{{ pessoa.pk }} - {{ pessoa.nome }} - deletado: {{ pessoa.is_removed }}</a> - <a
+                    href="{{ pessoa.update_url }}">editar</a> <a href="{{ pessoa.delete_url }}">[X]</a></p>
+        {% empty %}
+            Nenhuma pessoa cadastrada
+        {% endfor %}
+    </div>
+    =============================
+    <div>
+        <p>Pessoas deletadas:</p>
+        {% for pessoa_deletada in deletados %}
+            <p><a href="{{ pessoa_deletada.detail_url }}">{{ pessoa_deletada.pk }} - {{ pessoa_deletada.nome }}</a> - deletado: {{ pessoa_deletada.is_removed }}<a
+                    href="{{ pessoa_deletada.update_url }}">editar</a> <a href="{{ pessoa_deletada.delete_url }}">[X]</a></p>
+        {% empty %}
+            Nenhuma pessoa cadastrada
+        {% endfor %}
+    </div>
+{% endblock corpo %}
